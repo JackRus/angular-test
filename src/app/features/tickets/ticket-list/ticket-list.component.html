@@ -1,0 +1,43 @@
+<div class="tickets-page">
+
+    <div class="tickets-left-section">
+
+        <div class="tickets-header">
+            <h1>Tickets: {{(tickets$ | async)?.length}}</h1>
+        </div>
+
+        <!-- FILTERS -->
+        <div class="ticket-filters">
+            <div *ngFor="let filter of filters; let i = index"
+                (click)="changeFilter(filter.option)"
+                [class.filter-active]="(activeFilter$ | async) === filter.option">
+                {{ filter.label }}
+            </div>
+        </div>
+
+        <!-- LIST -->
+        <div class="ticket-list-container" *ngIf="(isLoading$ | async) === false else loadingTickets">
+                <jj-ticket-list-item
+                    *ngFor="let ticket of tickets$ | async; let i = index"
+                    [ticket]="ticket"
+                    [index]="i">
+                </jj-ticket-list-item>
+
+                <div class="loading-list" *ngIf="emptyFilter$ | async">
+                    Looks like these no tickets for this filter.
+                </div>
+        </div>
+    </div>
+
+    <!-- NEW TICKET -->
+    <jj-ticket-add></jj-ticket-add>
+
+</div>
+
+<!-- LOADING -->
+<ng-template #loadingTickets>
+    <div class="loading-list">
+        Loading tickets...
+    </div>
+</ng-template>
+

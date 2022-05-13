@@ -1,6 +1,6 @@
-import {TestBed, waitForAsync} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {BackendService} from "./backend.service";
+import { TestBed, waitForAsync } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { BackendService } from './shared/backend.service';
 
 describe('AppComponent', () => {
     beforeEach(waitForAsync(() => {
@@ -25,6 +25,6 @@ describe('AppComponent', () => {
         const fixture = TestBed.createComponent(AppComponent);
         fixture.detectChanges();
         const compiled = fixture.debugElement.nativeElement;
-        expect(compiled.querySelector('h2').textContent).toContain('Tickets');
+        expect(compiled.querySelector('h1').textContent).toContain('TICKET ONLINE');
     }));
 });

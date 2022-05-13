@@ -1,0 +1,9 @@
+<div class="new-ticket-container">
+    <h3>New Ticket</h3>
+
+    <textarea [formControl]="description" placeholder="Describe the situation..."></textarea>
+
+    <jj-ticket-assignee-selection (changed)="assigneeId = $event"></jj-ticket-assignee-selection>
+
+    <button mat-raised-button color="primary" (click)="addTicket()" [disabled]="description.invalid">Add Ticket</button>
+</div>

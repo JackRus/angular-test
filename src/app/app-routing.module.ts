@@ -10,7 +10,10 @@ import { RouterModule } from '@angular/router';
           redirectTo: 'tickets',
           pathMatch: 'full'
         },
-
+        {
+          path: 'tickets',
+          loadChildren: () => import('./features/tickets/tickets.module').then((m) => m.TicketsModule),
+        },
       ],
       {
         initialNavigation: 'enabledBlocking',

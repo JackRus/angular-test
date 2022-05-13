@@ -1,0 +1,8 @@
+<div class="select-wrapper">
+    <mat-select [(ngModel)]="assignee" placeholder="Assign to...">
+      <mat-option [value]="null" (click)="assign()">Not selected</mat-option>
+      <mat-option [value]="user.id" *ngFor="let user of assignees$ | async" (click)="assign()">
+          {{user.name}}
+      </mat-option>
+  </mat-select>
+</div>

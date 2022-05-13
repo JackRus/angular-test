@@ -1,0 +1,43 @@
+<div class="tickets-page details" [formGroup]="form">
+
+    <!-- LIST -->
+    <div class="ticket-details-section" *ngIf="isLoaded$ | async else loadingTickets">
+
+        <div class="tickets-header">
+            <h1>Tickets: {{ticket.id}}</h1>
+        </div>
+
+        <!-- DESCRIPTION -->
+        <label>Description</label>
+        <textarea formControlName="description"></textarea>
+
+        <!-- ASSIGNEE -->
+        <label>Assignee</label>
+        <jj-ticket-assignee-selection (changed)="setAssignee($event)"></jj-ticket-assignee-selection>
+
+        <!-- PRIORITY -->
+        <label>Priority</label>
+        <div class="select-wrapper">
+            <mat-select formControlName="priority" placeholder="Select priority...">
+                <mat-option value="High">High</mat-option>
+                <mat-option value="Normal">Normal</mat-option>
+                <mat-option value="Low">Low</mat-option>
+            </mat-select>
+        </div>
+
+        <!-- IS COMPLETED -->
+        <mat-checkbox formControlName="isCompleted" color="primary">Completed</mat-checkbox>
+
+        <div class="multi-item">
+            <button mat-raised-button class="default" routerLink="../">Back to list</button>
+            <button mat-raised-button color="primary" (click)="update()" [disabled]="form.invalid || form.pristine">Save Changes</button>
+        </div>
+    </div>
+</div>
+
+<!-- LOADING -->
+<ng-template #loadingTickets>
+    <div class="loading-list">
+        <div>Loading ticket details...</div>
+    </div>
+</ng-template>

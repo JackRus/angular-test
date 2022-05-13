@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Observable, of, throwError } from "rxjs";
-import { delay, tap } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { Observable, of, throwError } from 'rxjs';
+import { delay } from 'rxjs/operators';
+import { Ticket } from '../features/tickets/store/tickets.models';
 
 /**
  * This service acts as a mock backend.
@@ -13,31 +14,40 @@ export type User = {
   name: string;
 };
 
-export type Ticket = {
-  id: number;
-  description: string;
-  assigneeId: number;
-  completed: boolean;
-};
-
 function randomDelay() {
   return Math.random() * 1000;
 }
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class BackendService {
   storedTickets: Ticket[] = [
     {
       id: 0,
       description: "Install a monitor arm",
       assigneeId: 111,
-      completed: false
+      isCompleted: false,
+      priority: 'Low'
     },
     {
       id: 1,
       description: "Move the desk to the new location",
       assigneeId: 111,
-      completed: false
+      isCompleted: false,
+      priority: 'High'
+    },
+    {
+      id: 34,
+      description: "It has not yet been officially announced that One Punch Man will occur, although it is said to be taking place soon. As predicted, One Punch Man season 3 will premiere in late 2022 or early 2023, depending on when you count.",
+      assigneeId: null,
+      isCompleted: false,
+      priority: 'Low'
+    },
+    {
+      id: 25,
+      description: "Saitama is a God, and he is subconsciously bending reality to his will. In Episode 3 of One Punch Man Saitama reveals that he achieved his God-like level of strength through a daily training regiment of 100 push-ups, 100 sit-ups, 100 squats, and a 10 km run for three years.",
+      assigneeId: null,
+      isCompleted: false,
+      priority: 'High'
     }
   ];
 
@@ -69,12 +79,13 @@ export class BackendService {
     return of(this.findUserById(id)).pipe(delay(randomDelay()));
   }
 
-  newTicket(payload: { description: string }) {
+  newTicket(description: string, assigneeId: number | null) {
     const newTicket: Ticket = {
       id: ++this.lastId,
-      description: payload.description,
-      assigneeId: null,
-      completed: false
+      description: description,
+      assigneeId,
+      isCompleted: false,
+      priority: 'Low'
     };
 
     this.storedTickets = this.storedTickets.concat(newTicket);
@@ -86,8 +97,8 @@ export class BackendService {
     return this.update(ticketId, { assigneeId: userId });
   }
 
-  complete(ticketId: number, completed: boolean) {
-    return this.update(ticketId, { completed });
+  complete(ticketId: number, isCompleted: boolean) {
+    return this.update(ticketId, { isCompleted });
   }
 
   update(ticketId: number, updates: Partial<Omit<Ticket, "id">>) {

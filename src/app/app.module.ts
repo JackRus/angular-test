@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BackendService } from './backend.service';
+import { BackendService } from './shared/backend.service';
 import { ErrorMessageService } from './shared/tools/error-message.service';
 
 @NgModule({
@@ -20,7 +20,7 @@ import { ErrorMessageService } from './shared/tools/error-message.service';
     BrowserAnimationsModule,
     EffectsModule.forRoot([]),
     StoreModule.forRoot({}),
-    StoreDevtoolsModule.instrument({}),
+    StoreDevtoolsModule.instrument({ maxAge: 50 }),
     AppRoutingModule
   ],
   providers: [BackendService, ErrorMessageService],

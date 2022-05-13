@@ -1,0 +1,16 @@
+<div class="ticket-list-item">
+
+    <div class="ticket-meta">
+        TICKET: {{ticket.id}} | {{ ticket.priority}} Priority
+    </div>
+
+    <div class="ticket-actions">
+        <button mat-raised-button color="primary" [routerLink]="ticket.id.toString()">View/Edit</button>
+        <button mat-raised-button color="primary" (click)="complete()">Mark As {{ticket.isCompleted ? 'Incomplete' : 'Completed' }}</button>
+
+        <jj-ticket-assignee-selection [assignee]="ticket.assigneeId" (changed)="assign($event)"></jj-ticket-assignee-selection>
+    </div>
+
+    <div class="ticket-description">{{ticket.description}}</div>
+</div>
+
