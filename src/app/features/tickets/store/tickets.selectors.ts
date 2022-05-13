@@ -58,3 +58,9 @@ export const getSelectedLoaded = createSelector(
     getTicketsState,
     (state: TicketsState) => state.isSelectedLoaded
 );
+
+export const getTicketsCount = createSelector(
+    getAllTickets,
+    (tickets: Ticket[]) => tickets?.length
+);
+

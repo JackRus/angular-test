@@ -14,6 +14,7 @@ export class TicketsFacade {
     activeFilter$ = this.store.pipe(select(TicketsSelectors.getActiveFilter));
     assignees$ = this.store.pipe(select(TicketsSelectors.getAssignees));
     selectedLoaded$ = this.store.pipe(select(TicketsSelectors.getSelectedLoaded));
+    ticketsCount$ = this.store.pipe(select(TicketsSelectors.getTicketsCount));
 
     constructor(private readonly store: Store) {
         this.init();

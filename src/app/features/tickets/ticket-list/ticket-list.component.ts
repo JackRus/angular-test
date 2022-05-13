@@ -11,6 +11,7 @@ import { Ticket, TICKET_FILTERS, TicketFilterOption } from '../store/tickets.mod
 export class TicketListComponent implements OnInit {
 
     activeFilter$ = this.ticketService.activeFilter$;
+    ticketsCount$ = this.ticketService.ticketsCount$;
     tickets$!: Observable<Ticket[]>;
     emptyFilter$!: Observable<boolean>;
     isLoading$!: Observable<boolean>;

@@ -3,7 +3,7 @@
     <div class="tickets-left-section">
 
         <div class="tickets-header">
-            <h1>Tickets: {{(tickets$ | async)?.length}}</h1>
+            <h1>Tickets: {{ticketsCount$ | async}}</h1>
         </div>
 
         <!-- FILTERS -->
@@ -19,8 +19,7 @@
         <div class="ticket-list-container" *ngIf="(isLoading$ | async) === false else loadingTickets">
                 <jj-ticket-list-item
                     *ngFor="let ticket of tickets$ | async; let i = index"
-                    [ticket]="ticket"
-                    [index]="i">
+                    [ticket]="ticket">
                 </jj-ticket-list-item>
 
                 <div class="loading-list" *ngIf="emptyFilter$ | async">
