@@ -25,5 +25,6 @@ export function watchRouteParam<T>(param: string, router: Router): Observable<T>
     return router.events.pipe(filter(e => e instanceof NavigationEnd)).pipe(
         startWith(''),
         map(() => getRouteParam<T>(param,router.routerState.root)),
-        distinctUntilChanged());
+        distinctUntilChanged()
+    );
 }
